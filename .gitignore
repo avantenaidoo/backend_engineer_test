@@ -1,24 +1,24 @@
-# Node modules (all installed packages)
+# Dependencies
 node_modules/
 
-# Environment files (dotenv)
+# Build output
+dist/
+
+# Testing
+coverage/
+jest-cache/
+
+# Environment variables
 .env
 .env.local
 .env.*.local
 
 # Logs
 npm-debug.log*
-test-output.log
+*.log
 
-# Build or coverage output
-dist/
-build/
-coverage/
-
-# OS-generated files
+# OS / Editor
 .DS_Store
 Thumbs.db
-
-# Optional: Jest snapshot or cache folders
-jest-cache/
-jest-snapshots/
+.vscode/
+.idea/

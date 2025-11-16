@@ -1,0 +1,24 @@
+# Node modules (all installed packages)
+node_modules/
+
+# Environment files (dotenv)
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+test-output.log
+
+# Build or coverage output
+dist/
+build/
+coverage/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Optional: Jest snapshot or cache folders
+jest-cache/
+jest-snapshots/

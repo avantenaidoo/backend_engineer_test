@@ -1,3 +1,5 @@
+I’ve completed the backend engineer challenge and implemented a clean, scalable GraphQL API using Node.js and Apollo Server. The solution includes dynamic city suggestions, weather forecasting, and activity ranking based on real Open-Meteo data, with a clear separation of concerns and supporting test coverage. 
+
 # Travel Planning GraphQL API
 
 **Node.js + TypeScript + Apollo Server + Open-Meteo**

@@ -10,7 +10,7 @@ async function start() {
 
   const server = new ApolloServer({ typeDefs, resolvers });
   await server.start();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app: app as any });
 
   const PORT = 3000;
   app.listen(PORT, () => {

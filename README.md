@@ -58,6 +58,19 @@ All decisions were made to **deliver a clean, working, testable solution fast** 
 
 ---
 
+## Scaling Considerations
+
+- **Caching**: Add Redis for weather data (TTL 1 hour) to reduce API calls.
+- **Load Balancing**: Use PM2 or AWS ELB for multiple Node instances.
+- **Rate Limiting**: Express-rate-limit to protect from abuse.
+- **Batching**: DataLoaders in resolvers for batch API calls.
+- **Monitoring**: Sentry for errors, Prometheus for metrics (RPM, latency).
+- **Database**: Add PostgreSQL for user-saved plans if expanded.
+
+This keeps the API ready for 10k+ users/day.
+
+---
+
 ## Setup & Run
 
 ```bash

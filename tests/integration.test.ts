@@ -9,12 +9,18 @@ let server: ApolloServer;
 
 beforeAll(async () => {
   app = express();
-  server = new ApolloServer({ typeDefs, resolvers });
+
+  server = new ApolloServer({
+    typeDefs,
+    resolvers,
+  });
+
   await server.start();
   server.applyMiddleware({ app: app as any });
 });
 
-const gql = (query: string, vars = {}) => request(app).post('/graphql').send({ query, variables: vars });
+const gql = (query: string, vars = {}) =>
+  request(app).post('/graphql').send({ query, variables: vars });
 
 describe('API', () => {
   it('citySuggestions', async () => {
@@ -23,12 +29,29 @@ describe('API', () => {
   });
 
   it('weatherForecast', async () => {
-    const res = await gql(`query { weatherForecast(lat: -33.92, lng: 18.42, days: 1) { daily { tempMax } } }`);
+    const res = await gql(`
+      query {
+        weatherForecast(latitude: -33.92, longitude: 18.42, days: 1) {
+          daily {
+            temperatureMax
+          }
+        }
+      }
+    `);
     expect(res.body.data.weatherForecast.daily).toHaveLength(1);
   });
 
   it('rankedActivities', async () => {
-    const res = await gql(`query { rankedActivities(lat: -33.92, lng: 18.42, days: 1) { rank } }`);
-    expect(res.body.data.rankedActivities).toHaveLength(4);
+    const res = await gql(`
+      query {
+        rankedActivities(latitude: -33.92, longitude: 18.42, days: 1) {
+          date
+          activities {
+            rank
+          }
+        }
+      }
+    `);
+    expect(res.body.data.rankedActivities[0].activities).toHaveLength(4);
   });
 });

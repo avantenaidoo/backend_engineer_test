@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ActivityName, Activity } from '../types/sharedTypes.js';
+import { ActivityName, type Activity } from '../types/sharedTypes.js';
 import { ApiError } from '../errors/customErrors.js';
 
 interface DailyWeather {

@@ -10,8 +10,9 @@ export const typeDefs = gql`
   type City {
     name: String!
     country: String!
-    latitude: Float!
-    longitude: Float!
+    admin1: String
+    lat: Float!
+    lng: Float!
   }
 
   type DailyWeather {
@@ -28,7 +29,7 @@ export const typeDefs = gql`
   }
 
   type Activity {
-    name: ActivityName!
+    name: String!
     rank: Int!
     suitabilityScore: Float!
   }
@@ -37,18 +38,4 @@ export const typeDefs = gql`
     date: String!
     activities: [Activity!]!
   }
-
-  enum ActivityName {
-    SKIING
-    SURFING
-    INDOOR_SIGHTSEEING
-    OUTDOOR_SIGHTSEEING
-  }
 `;
-
-export enum ActivityName {
-  SKIING = 'SKIING',
-  SURFING = 'SURFING',
-  INDOOR_SIGHTSEEING = 'INDOOR_SIGHTSEEING',
-  OUTDOOR_SIGHTSEEING = 'OUTDOOR_SIGHTSEEING',
-}

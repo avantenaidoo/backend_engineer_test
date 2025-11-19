@@ -1,13 +1,22 @@
 import { getCitySuggestions } from '../services/geocoding.js';
-import { getForecast, rankActivities } from '../services/weather.js';
+import { getWeatherForecast, rankActivities } from '../services/weather.js';
+import { ValidationError } from '../errors/customErrors.js';
 
 export const resolvers = {
   Query: {
-    citySuggestions: async (_: any, { name }: { name: string }) => getCitySuggestions(name),
-    weatherForecast: async (_: any, { lat, lng, days }: { lat: number; lng: number; days: number }) => getForecast(lat, lng, days),
-    rankedActivities: async (_: any, { lat, lng, days }: { lat: number; lng: number; days: number }) => {
-      const forecast = await getForecast(lat, lng, days);
-      return rankActivities(forecast);
+    citySuggestions: async (_: any, { name }: { name: string }) => {
+      if (!name.trim()) throw new ValidationError('Name cannot be empty');
+      return getCitySuggestions(name);
+    },
+    weatherForecast: async (_: any, { latitude, longitude, days }: { latitude: number; longitude: number; days: number }) => {
+      if (isNaN(latitude) || isNaN(longitude)) throw new ValidationError('Invalid latitude or longitude');
+      return getWeatherForecast(latitude, longitude, days);
+    },
+    rankedActivities: async (_: any, { latitude, longitude, days }: { latitude: number; longitude: number; days: number }) => {
+      if (isNaN(latitude) || isNaN(longitude)) throw new ValidationError('Invalid latitude or longitude');
+      const weather = await getWeatherForecast(latitude, longitude, days);
+      const ranked = rankActivities(weather);
+      return weather.daily.map((day, index) => ({ date: day.date, activities: ranked[index] }));
     },
   },
 };

@@ -24,7 +24,7 @@ async function startServer() {
   });
 
   await server.start();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app: app as any });
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {

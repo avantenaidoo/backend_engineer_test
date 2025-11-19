@@ -11,7 +11,7 @@ beforeAll(async () => {
   app = express();
   server = new ApolloServer({ typeDefs, resolvers });
   await server.start();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app: app as any });
 });
 
 const gql = (query: string, vars = {}) => request(app).post('/graphql').send({ query, variables: vars });
